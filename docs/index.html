@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocoLab - Frontier AI on a Budget</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+  <meta name="description" content="LocoLab: an applied AI research lab studying what local AI can do on modest hardware. Curtin University.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0b;
+      --bg-secondary: #111114;
+      --bg-card: #16161a;
+      --bg-card-hover: #1c1c21;
+      --text-primary: #e8e6e3;
+      --text-secondary: #9a9a9e;
+      --text-muted: #5e5e63;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --accent-secondary: #60a5fa;
+      --border: #1e1e23;
+      --border-light: #2a2a30;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'DM Sans', -apple-system, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 11, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo .loco { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+    }
+
+    .hero-badge {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      position: relative;
+      letter-spacing: 0.05em;
+    }
+
+    .hero h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .hero h1 .highlight { color: var(--accent); }
+
+    .hero .tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      position: relative;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-secondary);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.25);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-light);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--text-muted);
+      transform: translateY(-1px);
+    }
+
+    section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      max-width: 600px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--card-accent, var(--accent)), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-card h3 {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .project-link {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      opacity: 0.8;
+    }
+
+    .hardware-section {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 6rem 2rem;
+    }
+
+    .hardware-section .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hardware-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .hardware-table th,
+    .hardware-table td {
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hardware-table th {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hardware-table td {
+      color: var(--text-secondary);
+    }
+
+    .hardware-table td:first-child {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .philosophy-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem;
+      max-width: 720px;
+    }
+
+    .philosophy-block blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .philosophy-block p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text-secondary); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+      }
+      .project-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo"><span class="loco">Loco</span>Lab</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="/docs/">Docs</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">Curtin University &middot; Applied AI Research</div>
+    <h1><span class="highlight">Loco</span>Lab</h1>
+    <p class="tagline">
+      Frontier AI on a budget. Crazy, right? We study what local AI can actually do on modest hardware -- and build tools for educators, students, and organisations who need privacy-first AI.
+    </p>
+    <div class="hero-actions">
+      <a href="/docs/" class="btn btn-primary">Read the Docs</a>
+      <a href="https://github.com/michael-borck/loco-lab" class="btn btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-label fade-up">Projects</div>
+    <h2 class="section-title fade-up">Four projects. One lab. Zero cloud dependency.</h2>
+    <p class="section-desc fade-up">
+      Each project tackles a different dimension of local AI -- from fine-tuning and routing to benchmarking, multi-GPU research, and AI-powered teaching scenarios.
+    </p>
+    <div class="project-grid">
+      <a href="https://locollm.org" class="project-card fade-up" style="--card-accent: #f97316;">
+        <div class="project-icon">&#129433;</div>
+        <h3>LocoLLM</h3>
+        <p>A routed swarm of tiny specialist models. Fine-tuned LoRA adapters behind a smart router, all running on consumer hardware. The flagship project.</p>
+        <span class="project-link" style="color: #f97316;">locollm.org &rarr;</span>
+      </a>
+      <a href="https://locobench.org" class="project-card fade-up" style="--card-accent: #22c55e;">
+        <div class="project-icon">&#128202;</div>
+        <h3>LocoBench</h3>
+        <p>Systematic benchmarking of LLM inference across every consumer GPU VRAM tier. The floor, not the ceiling. If it runs here, it runs on your card.</p>
+        <span class="project-link" style="color: #22c55e;">locobench.org &rarr;</span>
+      </a>
+      <a href="https://lococonvoy.org" class="project-card fade-up" style="--card-accent: #a855f7;">
+        <div class="project-icon">&#128666;</div>
+        <h3>LocoConvoy</h3>
+        <p>Multi-GPU parallelism on consumer PCIe hardware. Load balancing, Mixture of Agents, and speculative decoding without NVLink.</p>
+        <span class="project-link" style="color: #a855f7;">lococonvoy.org &rarr;</span>
+      </a>
+      <a href="https://locoensayo.org" class="project-card fade-up" style="--card-accent: #eab308;">
+        <div class="project-icon">&#127917;</div>
+        <h3>LocoEnsayo</h3>
+        <p>AI-populated rehearsal environments for professional education. Students practice in realistic simulated organisations before the stakes are real.</p>
+        <span class="project-link" style="color: #eab308;">locoensayo.org &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="hardware-section" id="hardware">
+    <div class="inner">
+      <div class="section-label fade-up">The Lab</div>
+      <h2 class="section-title fade-up">Six machines. All secondhand. All serious.</h2>
+      <p class="section-desc fade-up">
+        The entire fleet was assembled opportunistically -- the right capability at the right price, not a planned procurement. Total cost: well under $1,000 AUD.
+      </p>
+      <table class="hardware-table fade-up">
+        <thead>
+          <tr>
+            <th>Machine</th>
+            <th>Role</th>
+            <th>Key Hardware</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Colmena</td>
+            <td>Multi-GPU inference hive, LocoBench primary</td>
+            <td>WEIHO 8-GPU chassis, floor cards per VRAM tier</td>
+          </tr>
+          <tr>
+            <td>Burro</td>
+            <td>Overnight fine-tuning</td>
+            <td>IBM x3500 M4, Tesla P100 16 GB HBM2</td>
+          </tr>
+          <tr>
+            <td>Cerebro</td>
+            <td>LocoEnsayo inference host</td>
+            <td>Ryzen 5 2600, RTX 2060 Super 8 GB</td>
+          </tr>
+          <tr>
+            <td>Peque</td>
+            <td>Reference floor node</td>
+            <td>Dell Optiplex 990, GTX 1650 OC 4 GB</td>
+          </tr>
+          <tr>
+            <td>Tortuga</td>
+            <td>Multi-GPU test bench</td>
+            <td>ASUS B250 Mining Expert, 19x PCIe, 1250W PSU</td>
+          </tr>
+          <tr>
+            <td>Poco</td>
+            <td>Remote terminal, Apple Silicon testing</td>
+            <td>MacBook M1, 16 GB unified memory</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <section id="philosophy">
+    <div class="section-label fade-up">Philosophy</div>
+    <h2 class="section-title fade-up">Constraints are the research design.</h2>
+    <div class="philosophy-block fade-up">
+      <blockquote>
+        We are not mapping the floor of what AI can do because we cannot afford the ceiling. We are mapping the floor because most people live there, and nobody is documenting it honestly.
+      </blockquote>
+      <p>
+        The institutional restriction that started LocoLab was not an obstacle. It was a clarification. It forced the question: what is AI actually for in an education context? The answer -- amplifying thinking, not replacing it -- turned out to be better served by local small models than by frontier alternatives.
+      </p>
+      <p>
+        Secondhand hardware, small models, and honest baselines produce research that the A100 crowd is not doing -- not because they could not, but because the question only becomes visible from the floor.
+      </p>
+      <p style="color: var(--text-primary); font-style: italic; margin-bottom: 0;">
+        Loco by name. Serious by intent.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-label fade-up">Contact</div>
+    <h2 class="section-title fade-up">Say hello.</h2>
+    <p class="section-desc fade-up">
+      LocoLab is a <strong>School of Marketing and Management</strong> initiative at <strong>Curtin University</strong>, Perth, Western Australia. Whether you're a student, researcher, or just curious -- we'd love to hear from you.
+    </p>
+    <p class="section-desc fade-up" style="margin-top: 0.5rem;">
+      <strong>Project Lead:</strong> Michael Borck
+    </p>
+    <div class="hero-actions fade-up" style="margin-top: 1.5rem;">
+      <a href="mailto:michael.borck@curtin.edu.au" class="btn btn-primary">Get in Touch</a>
+      <a href="https://github.com/michael-borck/loco-lab" class="btn btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-text">&copy; 2026 LocoLab &middot; Curtin University</span>
+      <ul class="footer-links">
+        <li><a href="https://github.com/michael-borck/loco-lab">GitHub</a></li>
+        <li><a href="/docs/">Docs</a></li>
+        <li><a href="mailto:michael.borck@curtin.edu.au">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
