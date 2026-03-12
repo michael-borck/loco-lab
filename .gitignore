@@ -1,0 +1,22 @@
+# Sub-projects (each has its own repo)
+/loco-llm/
+/loco-bench/
+/loco-convoy/
+/loco-ensayo/
+/research/
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE
+.idea/
+.vscode/
