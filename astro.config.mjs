@@ -17,7 +17,6 @@ export default defineConfig({
         {
           label: 'Lab Overview',
           items: [
-            { label: 'About LocoLab', slug: 'about' },
             { label: 'Meet the Lab', slug: 'meet-the-lab' },
             { label: 'Meet the Team', slug: 'meet-the-team' },
           ],
