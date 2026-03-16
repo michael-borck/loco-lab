@@ -10,16 +10,15 @@ All figures use Australian dollars (AUD) and Perth electricity rates (Synergy Ho
 
 ## Power Draw
 
-Both Colmena and Burro run 24/7. Most of the time they're idle (SSH available, Ollama loaded, waiting for work). Inference and training runs push power draw up significantly but only for a few hours at a time.
+Colmena runs 24/7. Most of the time it's idle (SSH available, Ollama loaded, waiting for work). Inference and training runs push power draw up significantly but only for a few hours at a time.
 
 **Estimated draw by state:**
 
 | Machine | Idle | Active Load |
 |---|---|---|
-| **Colmena** (WEIHO 8-GPU + 3 GPUs installed) | ~100W | ~350W (inference) |
-| **Burro** (x3500 M4 + P100) | ~150W | ~420W (training) |
+| **Colmena** (WEIHO 8-GPU, 4 GPUs + P100) | ~120W | ~400W (inference/training) |
 
-*Note: Colmena estimates are based on typical TDP values (1050 Ti 75W, 2060 Super 175W, 3060 170W) for three installed cards, with idle and inference scaling factors applied. Power draw will increase as additional cards are installed. Real-world measurements will replace these estimates once available.*
+*Note: Colmena estimates are based on typical TDP values for installed cards, with idle and inference scaling factors applied. Power draw will increase as additional cards are installed. Real-world measurements will replace these estimates once available.*
 
 ---
 
@@ -31,19 +30,15 @@ These estimates assume 24/7 operation. Two scenarios: a conservative one where t
 
 | Machine | Average Draw | Annual kWh | Annual Cost |
 |---|---|---|---|
-| **Colmena** | ~290W | 2,540 kWh | ~$787 AUD |
-| **Burro** | ~285W | 2,497 kWh | ~$774 AUD |
-| **Combined** | | 5,037 kWh | ~$1,561 AUD |
+| **Colmena** | ~320W | 2,803 kWh | ~$869 AUD |
 
 **25% active / 75% idle (more typical):**
 
 | Machine | Average Draw | Annual kWh | Annual Cost |
 |---|---|---|---|
-| **Colmena** | ~210W | 1,840 kWh | ~$570 AUD |
-| **Burro** | ~218W | 1,910 kWh | ~$592 AUD |
-| **Combined** | | 3,750 kWh | ~$1,162 AUD |
+| **Colmena** | ~190W | 1,664 kWh | ~$516 AUD |
 
-Honest annual electricity cost for the full lab: roughly **$1,150-1,550 AUD per year**.
+Honest annual electricity cost for Colmena: roughly **$500-870 AUD per year**.
 
 That's a real cost. It's not free. The question is what you get for it, and what the alternatives cost.
 
@@ -53,10 +48,10 @@ That's a real cost. It's not free. The question is what you get for it, and what
 
 | Scenario | Duration | Energy | Electricity Cost |
 |---|---|---|---|
-| Burro: one adapter via PEFT overnight | 8 hours | 3.4 kWh | ~$1.05 AUD |
+| Colmena: one adapter via PEFT overnight (P100) | 8 hours | 3.4 kWh | ~$1.05 AUD |
 | Colmena: inference session (1 card, 2 hours) | 2 hours | 0.35 kWh | ~$0.11 AUD |
 
-Training now runs exclusively on Burro. A semester of adapter development (roughly 20 training runs across student groups) adds ~$21 AUD in marginal electricity on top of the idle baseline. Colmena's benchmarking and inference adds negligible marginal cost per session. CloudCore inference runs on Cerebro independently.
+A semester of adapter development (roughly 20 training runs across student groups) adds ~$21 AUD in marginal electricity on top of the idle baseline. Benchmarking and inference adds negligible marginal cost per session. CloudCore inference runs on Cerebro independently.
 
 ---
 
@@ -64,7 +59,7 @@ Training now runs exclusively on Burro. A semester of adapter development (rough
 
 Cloud GPU pricing for a comparable 16 GB card (A4000/V100 class) on platforms like RunPod, Lambda, or Vast.ai runs roughly $0.75-1.15 AUD per hour.
 
-| | Local (Burro) | Cloud GPU |
+| | Local (Colmena P100) | Cloud GPU |
 |---|---|---|
 | 8-hour training run | ~$1.05 electricity | ~$6-9 rental |
 | 20 runs per semester | ~$21 electricity | ~$120-180 rental |

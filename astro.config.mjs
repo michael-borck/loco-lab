@@ -19,6 +19,7 @@ export default defineConfig({
           items: [
             { label: 'Meet the Lab', slug: 'meet-the-lab' },
             { label: 'Meet the Team', slug: 'meet-the-team' },
+            { label: 'Machine Setup', slug: 'machine-setup' },
           ],
         },
         {

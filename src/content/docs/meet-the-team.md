@@ -18,7 +18,7 @@ His research background is in machine learning and computer vision, with a PhD f
 
 Michael is a Certified Professional of the Australian Computer Society, a member of the IEEE Computer Society, and co-founder of the Business AI Research Group at Curtin. He has published six open-source books on AI integration under MIT license, all freely available on GitHub.
 
-He runs the lab hardware, sets the project direction, designs the training curriculum, and writes most of the documentation. He also built the 3D-printed fan shroud cooling the P100 in Burro, because that's the kind of project this is.
+He runs the lab hardware, sets the project direction, designs the training curriculum, and writes most of the documentation. He also built 3D-printed fan shrouds for the GPU cooling in the lab, because that's the kind of project this is.
 
 **Contact:** [GitHub](https://github.com/michael-borck) | Curtin University
 

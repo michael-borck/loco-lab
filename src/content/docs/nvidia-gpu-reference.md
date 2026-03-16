@@ -249,7 +249,7 @@ The expected finding, and what the data should confirm:
 
 The goal is not to confirm the obvious -- it is to show *where* the cliff is steep and where it is gradual. The 2GB to 3GB jump and the 3GB to 4GB jump may tell very different stories. That granularity is what makes running the full tier stack worthwhile.
 
-This data is also relevant to fine-tuned model evaluation. If Burro produces a fine-tuned 1.1B model that outperforms the base Phi-2 2.7B on domain tasks despite running on a 2 GB card, that is a meaningful finding about what fine-tuning can recover at the quality floor.
+This data is also relevant to fine-tuned model evaluation. If the P100 produces a fine-tuned 1.1B model that outperforms the base Phi-2 2.7B on domain tasks despite running on a 2 GB card, that is a meaningful finding about what fine-tuning can recover at the quality floor.
 
 ---
 
