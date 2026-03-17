@@ -109,7 +109,7 @@ Colmena has three roles in priority order:
 | | |
 |---|---|
 | **Chassis** | WEIHO 8-GPU enclosed mining rig |
-| **GPUs** | GTX 950 2 GB, GTX 960 4 GB, GTX 1060 3 GB, GTX 1050 Ti 4 GB, GTX 1060 6 GB, GTX 980 Ti 6 GB, GTX Titan X 12 GB (7 cards, 1 slot reserved) |
+| **GPUs** | GTX 950 2 GB, GTX 960 4 GB, GTX 1050 Ti 4 GB, GTX 1060 3 GB, GTX 1060 6 GB x3, GTX 980 Ti 6 GB, GTX Titan X 12 GB (9 cards) |
 | **OS** | Ubuntu 22.04 LTS |
 | **Form** | Enclosed chassis |
 | **Role** | Legacy tier benchmarking; powered on for benchmark runs only |
@@ -120,7 +120,7 @@ Tortuga holds every GPU tier that predates the RTX era -- Pascal, Maxwell, and t
 
 The fleet covers a wide arc of consumer hardware history. The GTX 950 represents the genuine floor -- 2 GB VRAM, Maxwell architecture, what a budget builder was likely to have in 2015-2016. The Titan X at the other end of the rack represents 12 GB Maxwell-era compute, still capable for its age, and an interesting counterpoint to the RTX 3060's 12 GB Ampere architecture. The GTX 980 Ti is a similar wildcard -- 6 GB Pascal-era bandwidth, faster in some workloads than modern 6 GB budget cards.
 
-None of these cards have Tensor Cores. That's the defining characteristic of the Tortuga fleet: inference runs on standard CUDA cores only. Comparing Tortuga results against Colmena's RTX cards isolates exactly what Tensor Core acceleration contributes at each VRAM tier.
+None of these cards have Tensor Cores. That's the defining characteristic of the Tortuga fleet: inference runs on standard CUDA cores only. Comparing Tortuga results against Colmena's RTX cards isolates exactly what Tensor Core acceleration contributes at each VRAM tier. The three matched GTX 1060 6 GB cards mirror Colmena's three matched RTX 2060 Supers -- enabling a direct GTX-vs-RTX multi-GPU scaling comparison for the [tiered inference experiment](https://lococonvoy.org/docs/tiered-inference-experiment/).
 
 **GPU fleet -- pre-RTX coverage:**
 
@@ -130,7 +130,7 @@ None of these cards have Tensor Cores. That's the defining characteristic of the
 | GTX 960 | 4 GB | 112 GB/s | Maxwell | Entry 4 GB tier |
 | GTX 1050 Ti | 4 GB | 112 GB/s | Pascal | 4 GB Pascal floor; direct comparison to Hormiga |
 | GTX 1060 3 GB | 3 GB | 192 GB/s | Pascal | Unusual tier -- 3 GB sits between 2 GB and 4 GB floors |
-| GTX 1060 6 GB | 6 GB | 192 GB/s | Pascal | 6 GB Pascal floor |
+| GTX 1060 6 GB x3 | 6 GB each | 192 GB/s | Pascal | 6 GB Pascal floor; multi-GPU pooling (12/18 GB) |
 | GTX 980 Ti | 6 GB | 336 GB/s | Maxwell | Legacy high-end; bandwidth outlier for its VRAM tier |
 | GTX Titan X | 12 GB | 336 GB/s | Maxwell | Maxwell 12 GB; counterpoint to RTX 3060 12 GB Ampere |
 
@@ -198,7 +198,7 @@ The architectural split is worth noting: CloudCore and Pinnacle Tours are server
 |---------|----------------|--------|------|--------------|
 | **Poco** (MacBook M1) | LocoLabo | Apple M1 GPU | 16 GB unified | Remote terminal, Apple Silicon testing across all sub-projects |
 | **Colmena** (WEIHO 8-GPU) | LocoLLM / LocoBench / LocoConvoy | RTX 2060 Super x3, RTX 3060, Tesla P100†, RTX 3090*, RTX 4060 Ti* | 8/12/16/24 GB | RTX-era benchmarking, multi-GPU research, vLLM pooling, fine-tuning |
-| **Tortuga** (WEIHO 8-GPU) | LocoBench | GTX 950/960/1050Ti/1060 3GB/1060 6GB/980Ti/Titan X | 2-12 GB | Legacy benchmarking, pre-RTX fleet (powered on for runs only) |
+| **Tortuga** (WEIHO 8-GPU) | LocoBench | GTX 950/960/1050Ti/1060 3GB/1060 6GB x3/980Ti/Titan X | 2-12 GB (18 GB pooled) | Legacy benchmarking, pre-RTX fleet (powered on for runs only) |
 | **Hormiga** (ThinkCentre M710s) | LocoBench | GTX 1050 Ti LP | 4 GB | Minimum viable inference node, SFF reference testing |
 | **Cerebro** (Ryzen 5 2600) | LocoEnsayo | 2x RTX 2060 Super | 2x 8 GB | CloudCore Networks rehearsal platform |
 
