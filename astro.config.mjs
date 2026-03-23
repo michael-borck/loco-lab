@@ -8,6 +8,7 @@ export default defineConfig({
     starlight({
       title: 'LocoLab',
       description: 'Frontier AI on a Budget. Crazy, Right?',
+      favicon: '/favicon.svg',
       social: [
         { icon: 'external', label: 'Home', href: 'https://locolabo.org' },
         { icon: 'github', label: 'GitHub', href: 'https://github.com/michael-borck/loco-lab' },
