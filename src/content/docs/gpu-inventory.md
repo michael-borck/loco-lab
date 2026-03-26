@@ -18,7 +18,8 @@ The benchmark lab. An 8-GPU enclosed mining rig running LocoBench. Cards here ar
 | RTX 2060 Super (x3) | 8 GB | 448 GB/s | Floor of 8 GB Turing tier (Tensor Cores). Three cards for multi-GPU and result consistency validation |
 | Tesla P100 | 16 GB | 732 GB/s | Adapter training (PEFT only, no Tensor Cores). High bandwidth for 16 GB |
 | RTX 3090 | 24 GB | 936 GB/s | Reference ceiling -- 24 GB scaling data, not primary workload |
-| RTX 4060 Ti | 16 GB | 288 GB/s | Floor of 16 GB tier -- documents the bandwidth penalty |
+| RTX 4060 Ti | 16 GB | 288 GB/s | Floor of 16 GB consumer tier -- documents the bandwidth penalty |
+| Tesla V100 | 32 GB | 900 GB/s | 32 GB server tier (Volta, HBM2, Tensor Cores) |
 
 ---
 
@@ -52,11 +53,12 @@ Onboarding. New cards being integrated into the lab.
 
 ## Cerebro
 
-Home machine. Not part of the on-campus lab infrastructure.
+Home machine. Not part of the on-campus lab infrastructure. Benchmarks run here as needed.
 
 | Card | VRAM | Bandwidth | Tier Role |
 |------|------|-----------|-----------|
 | RTX 2060 Super (x2) | 8 GB | 448 GB/s | Development and testing |
+| Tesla V100 | 16 GB | 900 GB/s | 16 GB server tier (Volta, HBM2, Tensor Cores). PCIe adapter with passive heatsink |
 
 ---
 
@@ -82,13 +84,13 @@ Low-profile / office deployment.
 
 | Machine | Cards | Primary Role |
 |---------|-------|-------------|
-| Colmena | 11 | Benchmarking, adapter training, multi-GPU |
+| Colmena | 12 | Benchmarking, adapter training, multi-GPU |
 | Tortuga | 7 | Swappable tier cards for LocoBench coverage |
 | Pulpo | 3 | Onboarding new hardware |
-| Cerebro | 2 | Development (home) |
+| Cerebro | 3 | Development and benchmarking (home) |
 | Hormiga | 1 | Office deployment |
 | Unassigned | 1 | — |
-| **Total** | **25** | |
+| **Total** | **27** | |
 
 ---
 

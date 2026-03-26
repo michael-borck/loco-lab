@@ -150,7 +150,7 @@ LocoLab runs on six machines, all sourced secondhand. The entire fleet was assem
 
 | Machine | Role | Key Hardware |
 |---------|------|-------------|
-| **Colmena** | LocoConvoy multi-GPU experiments, LocoLLM adapter training | WEIHO 8-GPU enclosed chassis, GTX 1060 6GB x3, RTX 2060 Super x3, Tesla P100 16 GB HBM2 |
+| **Colmena** | LocoConvoy multi-GPU experiments, LocoLLM adapter training | WEIHO 8-GPU enclosed chassis, GTX 1060 6GB x3, RTX 2060 Super x3, RTX 4060 Ti 16GB, Tesla P100 16 GB, RTX 3090 24 GB, Tesla V100 32 GB |
 | **Tortuga** | LocoBench pre-RTX legacy benchmarking | WEIHO 8-GPU enclosed chassis, GTX 950 through Titan X |
 | **Cerebro** | LocoEnsayo AI simulation host | Ryzen 5 2600, 2x RTX 2060 Super 8 GB |
 | **Hormiga** | Minimum viable inference node | ThinkCentre M710s, GTX 1050 Ti LP 4 GB |
