@@ -50,6 +50,8 @@ We are not mapping the floor of what AI can do because we cannot afford the ceil
 | **LocoBench** | VRAM tier benchmarking across GPU generations | [locobench.org](https://locobench.org) |
 | **LocoConvoy** | Multi-GPU parallelism on consumer hardware | [lococonvoy.org](https://lococonvoy.org) |
 | **LocoEnsayo** | Authentic rehearsal environments for education | [locoensayo.org](https://locoensayo.org) |
+| **LocoAgente** | Agentic scaffolding for small local models | [locoagente.org](https://locoagente.org) |
+| **LocoPuente** | Student-facing local AI deployment layer | [locopuente.org](https://locopuente.org) |
 
 ---
 

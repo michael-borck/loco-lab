@@ -38,6 +38,7 @@ export default defineConfig({
             { label: 'LocoConvoy', link: 'https://lococonvoy.org' },
             { label: 'LocoEnsayo', link: 'https://locoensayo.org' },
             { label: 'LocoAgente', link: 'https://locoagente.org' },
+            { label: 'LocoPuente', link: 'https://locopuente.org' },
           ],
         },
         {
