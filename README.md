@@ -81,7 +81,7 @@ LocoBench documents two things mainstream benchmarks ignore: throughput (tokens 
 
 The sub-4 GB tiers are included deliberately. Most inference guides assert a "4 GB minimum" as received wisdom. LocoBench will show the data behind that claim -- where the quality cliff is steep, where it is gradual, and what an adapter-trained small model can recover at the floor.
 
-**Hardware:** Colmena (RTX-era tiers) + Tortuga (pre-RTX legacy tiers) + Hormiga (reference floor node)
+**Hardware:** Colmena (RTX-era consumer tiers) + Tortuga (pre-RTX legacy tiers) + Hormiga (reference floor node) + Hidra (server GPU tiers: V100 16 GB, P100 16 GB; M40, P40 incoming)
 
 **Key questions:** Where exactly is the quality cliff? What is the minimum viable hardware for useful inference on real tasks? Do adapter-trained small models recover quality that quantisation removes? Does the "Conversation not Delegation" use case hold up empirically at the 2-4 GB tier?
 
@@ -150,12 +150,12 @@ LocoLab runs on seven machines, all sourced secondhand. The entire fleet was ass
 
 | Machine | Role | Key Hardware |
 |---------|------|-------------|
-| **Colmena** | LocoBench RTX-era tier benchmarking | WEIHO 8-GPU enclosed chassis, GTX 1060 6GB x3, RTX 2060 Super x3, RTX 4060 Ti 16GB, Tesla P100 16 GB |
+| **Colmena** | LocoBench RTX-era consumer tier benchmarking | WEIHO 8-GPU enclosed chassis, GTX 1060 6GB x3, RTX 2060 Super x3, RTX 4060 Ti 16GB |
 | **Condor** | LocoLLM adapter training, dedicated single-card inference | X99 single-Xeon, 32 GB DDR4, Tesla V100 32 GB HBM2 |
 | **Tortuga** | LocoBench pre-RTX legacy benchmarking | WEIHO 8-GPU enclosed chassis, GTX 950 through Titan X |
 | **Puente** | LocoPuente BridgeAI PoC + LocoEnsayo chatbots | Ryzen 5 2600, RTX 3090 24 GB (single card) |
 | **Hormiga** | Minimum viable inference node | ThinkCentre M710s, GTX 1050 Ti LP 4 GB |
-| **Hidra** | LocoConvoy multi-GPU experiments, GPU onboarding | X99 MD8 dual-Xeon (2x E5-2680 v4), DDR4 ECC, 4x PCIe x16, open frame; GTX 1070, RTX 3050, RTX 3060 12 GB + onboarding rotation |
+| **Hidra** | LocoConvoy multi-GPU, LocoBench server GPU benchmarking, GPU onboarding | X99 MD8 dual-Xeon (2x E5-2680 v4), DDR4 ECC, 4x PCIe x16, open frame; Tesla V100 16 GB + Tesla P100 16 GB installed (Tesla M40 24 GB + P40 incoming); GTX 1070, RTX 3050, RTX 3060 12 GB consumer rotation |
 | **Poco** | Remote terminal, Apple Silicon testing | MacBook M1, 16 GB unified memory |
 
 The naming follows a Spanish thread -- Colmena (hive), Condor (condor), Tortuga (turtle), Puente (bridge), Hormiga (ant), Hidra (hydra), Poco (a little). All Linux machines run Ubuntu 22.04 LTS minimal server, CUDA throughout, Ollama for inference, llama.cpp under the hood.

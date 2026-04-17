@@ -4,12 +4,12 @@ title: "Meet the Lab"
 
 LocoLabo is the umbrella research initiative -- several sub-projects running across seven machines. None of them are new. All were sourced secondhand. Hardware was acquired opportunistically -- the right capability at the right price, not a planned procurement.
 
-The naming follows a Spanish thread: Colmena (hive), Tortuga (turtle), Poco (a little), Hormiga (ant), Puente (bridge), Hidra (hydra), and Condor (condor). The hive runs RTX-era benchmarking at the tier floors, the turtle holds the pre-RTX legacy fleet and wakes slowly when called, the little one connects you to all of them, the ant keeps the floor honest on minimal hardware, the bridge carries students to the stack through the LocoPuente PoC and the LocoEnsayo rehearsal chatbots, the hydra runs many heads in parallel on full-bandwidth PCIe for multi-GPU research and onboards every new card into the lab, and the condor soars alone with one big card doing the adapter-training work.
+The naming follows a Spanish thread: Colmena (hive), Tortuga (turtle), Poco (a little), Hormiga (ant), Puente (bridge), Hidra (hydra), and Condor (condor). The hive runs RTX-era benchmarking at the tier floors, the turtle holds the pre-RTX legacy fleet and wakes slowly when called, the little one connects you to all of them, the ant keeps the floor honest on minimal hardware, the bridge carries students to the stack through the LocoPuente PoC and the LocoEnsayo rehearsal chatbots, the hydra runs many heads in parallel on full-bandwidth PCIe for multi-GPU research, server GPU benchmarking, and onboarding every new card into the lab, and the condor soars alone with one big card doing the adapter-training work.
 
 **Sub-projects under LocoLabo:**
 
 - **LocoLLM** (Condor) -- adapter training on the V100 32 GB; dedicated single-card training and inference
-- **LocoBench** (Colmena + Tortuga + Hormiga) -- benchmarking platform; Colmena covers RTX-era tiers, Tortuga covers pre-RTX tiers, Hormiga anchors the SFF floor
+- **LocoBench** (Colmena + Tortuga + Hormiga + Hidra) -- benchmarking platform; Colmena covers RTX-era consumer tiers, Tortuga covers pre-RTX tiers, Hormiga anchors the SFF floor, Hidra covers the server GPU tiers
 - **LocoConvoy** (Hidra) -- multi-GPU architecture experiments on full-bandwidth PCIe x16, on an open frame for rapid card swaps
 - **LocoPuente** (Puente) -- student-facing BridgeAI PoC: primary LLM, cited search, image generation, voice, research tooling, all on the Ryzen 5 2600 + RTX 3090 24 GB
 - **LocoEnsayo** (Puente) -- most rehearsal chatbots (CloudCore Networks, Pinnacle Tours, TalkBuddy backend) now co-reside with the LocoPuente stack on Puente
@@ -50,7 +50,7 @@ Apple's MLX framework supports LoRA adapter training natively via `mlx_lm.lora`,
 | **Chassis** | WEIHO 8-GPU enclosed mining rig (72x42x18cm, steel, blue lid) |
 | **Motherboard** | Intel LGA1155, B75/H61 chipset |
 | **CPU** | Intel i3-3220 (Ivy Bridge, dual core) |
-| **GPUs** | 3x GTX 1060 6 GB, 3x RTX 2060 Super 8 GB, RTX 4060 Ti 16 GB, Tesla P100 16 GB HBM2 |
+| **GPUs** | 3x GTX 1060 6 GB, 3x RTX 2060 Super 8 GB, RTX 4060 Ti 16 GB |
 | **Memory** | 8 GB DDR3 SODIMM (board maximum) |
 | **Storage** | 128 GB mSATA (OS) + WD Scorpio Blue 750 GB SATA (model storage via `OLLAMA_MODELS`) |
 | **PSU** | Integrated 2000-3300W unit |
@@ -73,7 +73,6 @@ The i3-3220 CPU and 8 GB RAM ceiling exist by design. The CPU's job is to boot t
 | GTX 1060 6 GB x3 | 6 GB each | 192 GB/s | Pascal | No | 6 GB tier (Pascal, no Tensor Cores); bridges into Tortuga's pre-RTX coverage |
 | RTX 2060 Super 8 GB x3 | 8 GB each | 448 GB/s | Turing | Yes | 8 GB RTX-era floor; matched trio for variance discipline |
 | RTX 4060 Ti 16 GB | 16 GB | 288 GB/s | Ada Lovelace | Yes | 16 GB consumer floor -- documents the memory-bus penalty |
-| Tesla P100 16 GB | 16 GB | 732 GB/s | Pascal | No | 16 GB server tier; HBM2 bandwidth at Pascal compute |
 
 Multi-GPU experiments live on Hidra, where full-bandwidth PCIe x16 slots isolate the interconnect variable cleanly. Adapter training lives on Condor, where the V100 32 GB on a dedicated machine eliminates contention. Colmena's job is reproducible RTX-era tier benchmarking.
 
@@ -213,7 +212,7 @@ Thirty-two gigabytes of system RAM matches the VRAM and provides headroom for da
 
 ## Hidra
 
-**X99 Dual-Xeon Open Frame -- LocoConvoy Multi-GPU Experiments and GPU Onboarding**
+**X99 Dual-Xeon Open Frame -- LocoConvoy Multi-GPU, Server GPU Benchmarking, GPU Onboarding**
 
 | | |
 |---|---|
@@ -222,15 +221,20 @@ Thirty-two gigabytes of system RAM matches the VRAM and provides headroom for da
 | **Memory** | DDR4 ECC |
 | **GPU slots** | 4x PCIe x16 (full electrical width, dual-CPU lane provisioning) |
 | **Chassis** | Open frame |
-| **GPUs** | GTX 1070, RTX 3050, RTX 3060 12 GB; additional cards rotated through for onboarding |
+| **Server GPUs** | Tesla V100 16 GB HBM2, Tesla P100 16 GB HBM2; Tesla M40 24 GB and Tesla P40 incoming |
+| **Consumer rotation** | GTX 1070, RTX 3050, RTX 3060 12 GB (onboarding + small-card benchmarks) |
 | **OS** | Ubuntu 22.04 LTS |
-| **Role** | LocoConvoy multi-GPU experiments; GPU onboarding for every new card in the lab |
+| **Role** | LocoConvoy multi-GPU experiments; LocoBench server GPU benchmarking; GPU onboarding for every new card in the lab |
 
 Hidra means "hydra" in Spanish. Many heads, each doing its own thing, sharing one body.
 
-Hidra is the lab's multi-GPU platform. Where Colmena's mining-oriented board trades PCIe width for slot count, Hidra runs four slots at full x16 on dual-CPU lane provisioning. That distinction is the point. For LocoConvoy experiments where PCIe bandwidth dominates -- vLLM tensor parallelism, cross-card KV-cache traffic, pipeline-parallel inference -- Hidra provides the uncrippled interconnect that a mining board cannot.
+Hidra does three jobs on the same open-frame workstation. The four full-width PCIe x16 slots, the dual-CPU lane provisioning, and the easy card-swap access are the reason all three can co-locate.
 
-Hidra's second role is GPU onboarding. Every new card in the lab -- consumer or datacenter, current generation or deprecated -- arrives on Hidra first for burn-in, driver validation, and compatibility testing before being assigned to its permanent home. The open-frame chassis is the reason. No case to open, no cable management, no thermal envelope to respect for a brief characterisation run -- slot a card, power on, test, move it on. That ergonomic difference matters when card turnover is weekly.
+**LocoConvoy multi-GPU experiments.** Where Colmena's mining-oriented board trades PCIe width for slot count, Hidra runs four slots at full x16. For experiments where PCIe bandwidth dominates -- vLLM tensor parallelism, cross-card KV-cache traffic, pipeline-parallel inference -- Hidra provides the uncrippled interconnect that a mining board cannot.
+
+**Server GPU benchmarking.** The Tesla M40, P40, P100, and V100 family all pass through Hidra for LocoBench runs at their native VRAM tiers. The open-frame chassis accepts the passive-cooled datacenter form factor better than Colmena's enclosed mining rig, and the full x16 slots mean the benchmark reflects the card rather than the slot. Currently installed: V100 16 GB (Volta, Tensor Cores, HBM2 at 900 GB/s) and P100 16 GB (Pascal, HBM2 at 732 GB/s). Incoming: M40 24 GB (Maxwell, floor of the 24 GB server tier) and P40 24 GB (Pascal with CC 6.1, full modern inference stack at 24 GB).
+
+**GPU onboarding.** Every new card in the lab -- consumer or datacenter, current generation or deprecated -- arrives on Hidra first for burn-in, driver validation, and compatibility testing before being assigned to its permanent home. The open-frame chassis is the reason. No case to open, no cable management, no thermal envelope to respect for a brief characterisation run -- slot a card, power on, test, move it on.
 
 Dual E5-2680 v4s give Hidra something the rest of the fleet lacks: real CPU. Twenty-eight cores and fifty-six threads handle data preprocessing, multi-process inference orchestration, and vLLM's Python overhead without the CPU ever becoming the bottleneck -- which is exactly what you want when the research question is about GPU scaling. DDR4 ECC and the full lane count on both sockets round out the platform.
 
@@ -252,12 +256,12 @@ Dual E5-2680 v4s give Hidra something the rest of the fleet lacks: real CPU. Twe
 
 | Machine | Sub-project(s) | GPU(s) | VRAM | Primary Role |
 |---------|----------------|--------|------|--------------|
-| **Colmena** (WEIHO 8-GPU) | LocoBench | GTX 1060 6GB x3, RTX 2060 Super x3, RTX 4060 Ti 16GB, Tesla P100 | 6/8/16 GB | RTX-era tier benchmarking |
+| **Colmena** (WEIHO 8-GPU) | LocoBench | GTX 1060 6GB x3, RTX 2060 Super x3, RTX 4060 Ti 16GB | 6/8/16 GB | RTX-era consumer tier benchmarking |
 | **Tortuga** (WEIHO 8-GPU) | LocoBench | GTX 950/960/1050Ti/1060 3GB/1060 6GB/980Ti/Titan X | 2-12 GB | Pre-RTX legacy benchmarking (powered on for runs only) |
 | **Puente** (Ryzen 5 2600) | LocoPuente / LocoEnsayo | RTX 3090 24 GB | 24 GB | Student-facing BridgeAI stack and rehearsal chatbots |
 | **Condor** (X99 single Xeon) | LocoLLM | Tesla V100 32 GB | 32 GB | Dedicated adapter training and single-card inference |
 | **Hormiga** (ThinkCentre M710s) | LocoBench | GTX 1050 Ti LP | 4 GB | Minimum viable inference node, SFF reference testing |
-| **Hidra** (X99 dual Xeon, open frame) | LocoConvoy | GTX 1070, RTX 3050, RTX 3060 12 GB + onboarding rotation | 4x PCIe x16 | Multi-GPU experiments and GPU onboarding |
+| **Hidra** (X99 dual Xeon, open frame) | LocoConvoy / LocoBench | V100 16 GB, P100 16 GB; M40, P40 incoming; GTX 1070, RTX 3050, RTX 3060 12 GB rotation | 4x PCIe x16 | Multi-GPU experiments, server GPU benchmarking, GPU onboarding |
 | **Poco** (MacBook M1) | LocoLabo | Apple M1 GPU | 16 GB unified | Remote terminal, Apple Silicon testing |
 
 †Arriving

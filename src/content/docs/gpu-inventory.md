@@ -16,7 +16,6 @@ The RTX-era benchmark platform. An 8-GPU enclosed mining rig running LocoBench. 
 |------|------|-----------|-----------|
 | GTX 1060 6 GB (x3) | 6 GB | 192 GB/s | Floor of 6 GB tier (Pascal, no Tensor Cores); bridges into Tortuga's pre-RTX coverage |
 | RTX 2060 Super (x3) | 8 GB | 448 GB/s | Floor of 8 GB Turing tier (Tensor Cores). Three cards for result-consistency validation |
-| Tesla P100 | 16 GB | 732 GB/s | 16 GB server tier. HBM2 bandwidth at Pascal compute (no Tensor Cores) |
 | RTX 4060 Ti | 16 GB | 288 GB/s | Floor of 16 GB consumer tier -- documents the memory-bus penalty |
 
 ---
@@ -39,7 +38,18 @@ Swappable bench cards. Cards rotate through Tortuga to fill out LocoBench tier c
 
 ## Hidra
 
-Full-bandwidth multi-GPU research, server GPU benchmarking, and GPU onboarding. X99 dual-Xeon platform with 4x PCIe x16 slots. Server cards (M40, P40, P100, V100) are rotated through for LocoBench runs at their native VRAM tiers.
+Full-bandwidth multi-GPU research, server GPU benchmarking, and GPU onboarding. X99 dual-Xeon platform with 4x PCIe x16 slots in an open-frame chassis for rapid card swaps. The server GPUs are the primary LocoBench payload at their native VRAM tiers; consumer cards rotate through for onboarding and fill-in benchmarks.
+
+**Server GPUs:**
+
+| Card | VRAM | Bandwidth | Tier Role |
+|------|------|-----------|-----------|
+| Tesla V100 | 16 GB | 900 GB/s | 16 GB server tier (Volta, HBM2, Tensor Cores) |
+| Tesla P100 | 16 GB | 732 GB/s | 16 GB server tier (Pascal, HBM2, no Tensor Cores) |
+| Tesla M40 | 24 GB | 288 GB/s | 24 GB server floor (Maxwell, CC 5.2, Ollama only). **Incoming** |
+| Tesla P40 | 24 GB | 346 GB/s | 24 GB server tier (Pascal, full modern stack). **Incoming** |
+
+**Consumer rotation (onboarding + small-card benchmarks):**
 
 | Card | VRAM | Bandwidth | Tier Role |
 |------|------|-----------|-----------|
@@ -85,7 +95,6 @@ Low-profile / office deployment.
 |------|------|-----------|-------|
 | GTX 1650 OC LP | 4 GB | 128 GB/s | Turing, no Tensor Cores. Low-profile. No current assignment |
 | RTX 2060 Super (x2) | 8 GB | 448 GB/s | Awaiting assignment |
-| Tesla V100 | 16 GB | 900 GB/s | Volta, HBM2, Tensor Cores. Awaiting assignment |
 
 ---
 
@@ -93,14 +102,14 @@ Low-profile / office deployment.
 
 | Machine | Cards | Primary Role |
 |---------|-------|-------------|
-| Colmena | 8 | RTX-era LocoBench tier benchmarking |
+| Colmena | 7 | RTX-era LocoBench consumer tier benchmarking |
 | Tortuga | 7 | Swappable tier cards for pre-RTX LocoBench coverage |
-| Hidra | 3 | LocoConvoy multi-GPU experiments and GPU onboarding |
+| Hidra | 5 | LocoConvoy multi-GPU + server GPU benchmarking + onboarding (2 server cards installed, 2 incoming) |
 | Puente | 1 | LocoPuente PoC + LocoEnsayo chatbots (RTX 3090 24 GB) |
 | Condor | 1 | Dedicated LocoLLM adapter training and single-card inference |
 | Hormiga | 1 | SFF floor node / office deployment |
-| Unassigned | 4 | — |
-| **Total** | **25** | |
+| Unassigned | 3 | — |
+| **Total installed** | **25** | (+ 2 incoming server cards for Hidra) |
 
 ---
 
