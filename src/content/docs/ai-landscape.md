@@ -50,6 +50,48 @@ This is not a criticism. It is the economics. But it means that any curriculum b
 
 ---
 
+## GPU Rental — Self-Hosted in the Cloud
+
+This is the option most comparisons miss. Between "use someone else's model via subscription" and "run your own model on your own hardware" sits a third path: **rent GPU hardware and run your own model on it**.
+
+This is categorically different from subscribing to ChatGPT or Claude. You are not accessing an AI provider's model through their API. You are renting raw compute, deploying Ollama or llama.cpp yourself, and running an open-weight model of your choosing. Your data goes to your rented server — not through any AI company's inference infrastructure.
+
+### Why This Matters
+
+| | Managed AI (ChatGPT, Claude) | GPU Rental (RunPod, etc.) | Local Inference |
+|--|-----|-----|-----|
+| Data sovereignty | No — processed by provider | Yes — your server, your model | Yes — never leaves device |
+| Subscription model | Yes | No — pay for compute time used | No |
+| Hardware required | None | None | Yes |
+| Model choice | Provider's models only | Any open-weight model | Any open-weight model |
+| Availability | Requires internet | Requires internet | Works offline |
+| VRAM ceiling | Unlimited (provider's) | As high as you rent | Limited to your hardware |
+
+### Providers
+
+| Provider | Notes |
+|----------|-------|
+| **RunPod** | Best GPU-per-dollar for AI workloads. Spot (cheap, interruptible) and on-demand. Straightforward setup. |
+| **Vast.ai** | Peer-to-peer GPU marketplace — cheapest option, variable reliability. Good for short burst jobs. |
+| **Lambda Labs** | Reserved instances, more predictable than spot markets. Good for longer-running deployments. |
+| **Paperspace** | Clean interface, good for students. Gradient notebooks lower the setup barrier. |
+| **AWS / GCP / Azure** | Enterprise SLAs and compliance, significantly higher cost. Relevant for institutional deployments. |
+
+### When It Makes Sense
+
+- You need more VRAM than your hardware provides (e.g., want to run a 70B model without buying a $2,000 machine)
+- You want a persistent server accessible to multiple users or from multiple locations
+- You are evaluating whether local inference is worth the hardware investment — rent first, buy later
+- You need burst compute for a specific project without committing to hardware
+
+### The Honest Trade-off
+
+GPU rental gives you data sovereignty and model choice without upfront hardware cost. The trade-off is ongoing compute cost — it is not free to leave a rented GPU instance running. For a student who uses it occasionally for a few hours at a time, RunPod spot instances can be surprisingly cheap. For a persistent always-on server, costs accumulate.
+
+**Honest assessment:** For students who cannot run capable models on their own hardware and are uncomfortable with the data implications of managed AI subscriptions, a RunPod spot instance running Ollama is a practical and principled middle path. It is also useful for experimenting with larger models before deciding whether to invest in hardware.
+
+---
+
 ## Local Inference Tools
 
 LocoLLM is not the only way to run models locally. The local AI ecosystem is maturing rapidly, and several tools are excellent.
@@ -120,9 +162,11 @@ This is what LocoLLM actually recommends, not what a marketing page would say:
 
 3. **Use cheap APIs when free tiers are insufficient.** Haiku, GPT-4o-mini, and Gemini Flash are remarkable value. If you have a small budget, these stretch further than subscriptions.
 
-4. **Use LocoLLM when it makes sense.** If you need unlimited local inference with no cost anxiety. If you are contributing to the project as a learning exercise. If you care about privacy. If you want to understand how adapter training and routing work by building the system yourself.
+4. **Consider GPU rental if you care about sovereignty but lack the hardware.** A RunPod spot instance running Ollama costs a few cents per hour and gives you full model choice and data control without buying a GPU. Useful for trying larger models, running a persistent shared server, or evaluating whether local inference is worth a hardware investment.
 
-5. **Do not use LocoLLM because you think you should.** If free Gemini meets your needs, use free Gemini. The goal is student capability, not project adoption.
+6. **Use LocoLLM when it makes sense.** If you need unlimited local inference with no cost anxiety. If you are contributing to the project as a learning exercise. If you care about privacy. If you want to understand how adapter training and routing work by building the system yourself.
+
+7. **Do not use LocoLLM because you think you should.** If free Gemini meets your needs, use free Gemini. The goal is student capability, not project adoption.
 
 ---
 
