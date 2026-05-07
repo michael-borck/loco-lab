@@ -3,7 +3,10 @@ title: LocoLab
 description: Applied AI research at Curtin University. The work is deliberate. The hardware is secondhand. The questions are serious.
 template: splash
 hero:
-  tagline: The work is deliberate. The hardware is secondhand. The questions are serious.
+  tagline: |
+    The work is deliberate. The hardware is secondhand. The questions are serious.
+
+    Local AI as a different bet, not a smaller one.
   image:
     file: ../../assets/lab.svg
   actions:
@@ -15,6 +18,10 @@ hero:
       link: /docs/research/
       icon: external
       variant: secondary
+    - text: What we've found
+      link: /docs/findings/
+      icon: external
+      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -27,9 +34,10 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     Most AI research documents the ceiling. We document the floor — what local small models can actually do on modest hardware — because most people live there and nobody is doing it honestly.
   </Card>
   <Card title="Local and private by design" icon="approve-check">
-    Data sovereignty, student privacy, institutional governance. Local inference is not a workaround for policy constraints — it is the only fully compliant path for many organisations.
+    Data sovereignty, individual privacy, institutional governance. Local inference is not a workaround for policy constraints — it is the only fully compliant path for many organisations, and the only honest answer for anyone who doesn't want their data on someone else's machine.
   </Card>
-  <Card title="Built to teach" icon="open-book">
-    Students learn by building. Adapter training, evaluation pipelines, routing systems, deployment stacks — real engineering on real problems, not toy projects.
+  <Card title="Five principles, one bridge" icon="random">
+    Engineer before hardware. Specialize and harness. Vary, don't average. Conversation, not delegation. And LocoPuente — the bridge that brings frontier-equivalent tools onto local infrastructure.
+    [Read the thesis →](the-loco-thesis)
   </Card>
 </CardGrid>
