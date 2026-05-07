@@ -18,6 +18,8 @@ You refuse to pay per-token for something your own hardware can do. You've done 
 - [LocoLLM](https://locollm.org) — a routed specialist model that runs free on consumer GPUs
 - [AI Landscape](ai-landscape) — honest comparison of local vs cloud options, including cheap API paths
 
+And the [bridge](the-loco-thesis) is built for you specifically — frontier-equivalent tools without frontier costs is the bridge's whole job.
+
 ---
 
 ## 🤖 The Tinkerer
@@ -28,6 +30,8 @@ You want to understand how LLMs actually work by cracking them open and rewiring
 - [LocoLLM](https://locollm.org) — adapter training, evaluation harnesses, and a router you can improve
 - [LocoBench](https://locobench.org) — systematic benchmarking infrastructure to measure what you built
 - [Getting Started](getting-started) — technical foundations: inference, VRAM, quantisation, the full stack
+
+The harness is the part you'll most enjoy taking apart — see [the thesis](the-loco-thesis) for why the engineering around the model matters more than the model.
 
 ---
 
@@ -41,6 +45,8 @@ You need reproducible local inference for experiments. You want to test whether 
 - [LocoAgente](https://locoagente.org) — agentic scaffolding research: can small models think in loops?
 - [Research](research) — active and planned studies across the lab
 
+Our [methodology](the-loco-thesis) is laid out in the thesis: honest baselines, surfaced uncertainty, status markers on every claim. And [findings](findings) shows you what's measured, what's claimed, and what would invalidate each.
+
 ---
 
 ## 🏫 The Educator
@@ -51,6 +57,8 @@ You teach AI, computing, or a professional discipline and want a real project yo
 - [LocoEnsayo](https://locoensayo.org) — AI-populated rehearsal environments: security audits, requirements gathering, difficult conversations
 - [LocoLLM](https://locollm.org) — a teaching and research framework students build by contributing adapters, benchmarks, and routing improvements
 - [Why Local AI](why-local-ai) — the case for local AI in education and institutional contexts
+
+The "[conversation, not delegation](the-loco-thesis)" principle is the pedagogical heart of the lab — it's what the Cognitive Strategy Transfer and Keep Asking research threads are about, and why the rehearsal environments are designed the way they are.
 
 ---
 
@@ -63,6 +71,8 @@ Your data does not leave your machine. Period. Medical notes, legal research, pe
 - [AI Landscape](ai-landscape) — why "private by policy" is not the same as "private by architecture"
 - [Why Local AI](why-local-ai) — data sovereignty, compliance, and the structural argument for local inference
 
+Local AI is not just "private by policy" but [private by architecture](the-loco-thesis) — the bridge synthesises capability and privacy in a single stack you own.
+
 ---
 
 ## ⚙ The Scrapper
@@ -73,6 +83,8 @@ You know the best gear does not make the best work. A $150 secondhand GPU and sh
 - [LocoBench](https://locobench.org) — floor-representative benchmarks: worst card per VRAM tier, honest baselines
 - [GPU Inventory](https://locobench.org/docs/gpu-inventory/) — the actual secondhand fleet running these experiments
 - [Economics of Local Training](economics-of-local-training) — what local AI actually costs to build and run
+
+The whole "[engineer before hardware](the-loco-thesis)" principle was built for you. Five `llama.cpp` flags + system RAM letting an eight-year-old GTX 1060 run a 30-billion-parameter MoE model is the kind of finding the floor produces.
 
 ---
 
