@@ -58,6 +58,18 @@ The "boring" use cases are where local AI earns its place. A transcription pipel
 
 ---
 
+## Where local AI *wins* (not just where it doesn't lose)
+
+The "matches cloud on focused tasks" framing above is true and useful. It is also defensive. There are tasks where local AI doesn't just match cloud — it *outperforms* it, for structural reasons rather than incidental ones.
+
+**Creative work, because variance > precision.** Frontier models are trained to produce safe, average outputs. Ask 50 of them to write a story about a boy and a dragon and you get 50 stories with the same shape. Local small models, with a [variance-engineering harness](the-loco-thesis), compete on creative tasks because their imprecision *becomes variance*, and variance is what creativity needs. We're not trying to make small models precise — we're channelling what they already do.
+
+**Verified offloading, where conversation beats delegation.** Cognitive offloading without verification is surrender. With verification, it's amplification. Frontier APIs typically don't bother surfacing the seams: you get a confident answer and the loop closes. A [good harness](the-loco-thesis) makes the verification cheap — surfacing uncertainty, exposing tool outputs, maintaining conversation state so you can push back without re-explaining. Local AI plus a good harness gives the human a verification loop frontier APIs don't.
+
+**Frontier-equivalent UX, on hardware you own.** Frontier *capability* and frontier *experience* are separable. The tools users want — NotebookLM-style document chat, Claude-style coding assistance, voice, image generation — can be delivered by [a stack you control](the-loco-thesis). LocoPuente exists to prove this. The argument isn't "local is good enough." The argument is "local is the right shape for the use case."
+
+---
+
 ## The Hybrid Model
 
 The future is not "local vs. cloud" — it is a **hybrid architecture** that deploys each where it performs best:
