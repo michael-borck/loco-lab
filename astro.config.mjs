@@ -24,7 +24,9 @@ export default defineConfig({
           label: 'Lab Overview',
           items: [
             { label: 'Meet the Lab', slug: 'meet-the-lab' },
+            { label: 'The Loco Thesis', slug: 'the-loco-thesis' },
             { label: 'Are You Loco Enough?', slug: 'audience' },
+            { label: 'Find Your Starting Point', slug: 'find-your-starting-point' },
             { label: 'Meet the Team', slug: 'meet-the-team' },
             { label: 'Machine Setup', slug: 'machine-setup' },
             { label: 'FAQ', slug: 'faq' },
@@ -34,6 +36,7 @@ export default defineConfig({
           label: 'Research',
           items: [
             { label: 'Papers & Projects', slug: 'research' },
+            { label: 'Findings', slug: 'findings' },
           ],
         },
         {
