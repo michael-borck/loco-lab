@@ -7,7 +7,7 @@ LocoLab has six active projects and several supporting docs. Three short questio
 
 <div id="loco-wizard"></div>
 
-<style is:inline>
+<style>
   #loco-wizard {
     margin: 2rem 0 3rem;
   }
@@ -179,7 +179,7 @@ LocoLab has six active projects and several supporting docs. Three short questio
   }
 </style>
 
-<script is:inline>
+<script>
 (function () {
   const root = document.getElementById('loco-wizard');
   if (!root) return;
@@ -228,16 +228,16 @@ LocoLab has six active projects and several supporting docs. Three short questio
   ];
 
   const projectInfo = {
-    puente:    { name: 'LocoPuente',                  url: 'https://locopuente.org',                    line: 'A full local AI service stack on hardware you own and control — frontier-equivalent UX, no metering.' },
-    llm:       { name: 'LocoLLM',                     url: 'https://locollm.org',                       line: 'Adapter training, routing, and a specialist-model framework you can extend.' },
-    bench:     { name: 'LocoBench',                   url: 'https://locobench.org',                     line: 'VRAM-tier benchmarking with real cards and honest baselines — what each tier can actually do.' },
-    convoy:    { name: 'LocoConvoy',                  url: 'https://lococonvoy.org',                    line: 'Multi-GPU parallelism experiments on consumer PCIe hardware.' },
-    agente:    { name: 'LocoAgente',                  url: 'https://locoagente.org',                    line: 'Agentic scaffolding research: can small models do useful work in multi-turn loops?' },
-    ensayo:    { name: 'LocoEnsayo',                  url: 'https://locoensayo.org',                    line: 'AI-populated rehearsal environments where students practise professional skills before facing the real thing.' },
-    landscape: { name: 'AI Landscape',                url: '/docs/ai-landscape/',                       line: 'Honest comparison of local vs cloud options, including the cases where cloud is the right call.' },
-    why:       { name: 'Why Local AI',                url: '/docs/why-local-ai/',                       line: 'The structural argument: data sovereignty, compliance, and "private by architecture" rather than "private by policy".' },
-    start:     { name: 'Getting Started',             url: '/docs/getting-started/',                    line: 'Technical foundations — inference, VRAM, quantisation, and the rest of the stack.' },
-    research:  { name: 'Research',                    url: '/docs/research/',                           line: 'Active and planned studies across the lab, with status markers on every claim.' },
+    puente:      { name: 'LocoPuente',                  url: 'https://locopuente.org',                    line: 'A full local AI service stack on hardware you own and control — frontier-equivalent UX, no metering.' },
+    llm:         { name: 'LocoLLM',                     url: 'https://locollm.org',                       line: 'Adapter training, routing, and a specialist-model framework you can extend.' },
+    bench:       { name: 'LocoBench',                   url: 'https://locobench.org',                     line: 'VRAM-tier benchmarking with real cards and honest baselines — what each tier can actually do.' },
+    convoy:      { name: 'LocoConvoy',                  url: 'https://lococonvoy.org',                    line: 'Multi-GPU parallelism experiments on consumer PCIe hardware.' },
+    agente:      { name: 'LocoAgente',                  url: 'https://locoagente.org',                    line: 'Agentic scaffolding research: can small models do useful work in multi-turn loops?' },
+    ensayo:      { name: 'LocoEnsayo',                  url: 'https://locoensayo.org',                    line: 'AI-populated rehearsal environments where students practise professional skills before facing the real thing.' },
+    landscape:   { name: 'AI Landscape',                url: '/docs/ai-landscape/',                       line: 'Honest comparison of local vs cloud options, including the cases where cloud is the right call.' },
+    why:         { name: 'Why Local AI',                url: '/docs/why-local-ai/',                       line: 'The structural argument: data sovereignty, compliance, and "private by architecture" rather than "private by policy".' },
+    start:       { name: 'Getting Started',             url: '/docs/getting-started/',                    line: 'Technical foundations — inference, VRAM, quantisation, and the rest of the stack.' },
+    research:    { name: 'Research',                    url: '/docs/research/',                           line: 'Active and planned studies across the lab, with status markers on every claim.' },
     inventory:   { name: 'GPU Inventory',               url: 'https://locobench.org/docs/gpu-inventory/', line: 'The actual secondhand fleet running these experiments — what was bought, what it cost, what it can do.' },
     econ:        { name: 'Economics of Local Training', url: '/docs/economics-of-local-training/',        line: 'What local AI actually costs to build and run — capital, electricity, time.' },
     opportunity: { name: 'The Local AI Opportunity',    url: '/docs/the-local-ai-opportunity/',           line: 'The strategic argument: who benefits from local AI, why now, and what building it for them actually looks like.' },
@@ -435,7 +435,7 @@ LocoLab has six active projects and several supporting docs. Three short questio
 
 If you'd rather browse directly:
 
-- **[All six personas in detail](/docs/audience/)** — the full audience page this wizard draws from
+- **[All nine personas in detail](/docs/audience/)** — the full audience page this wizard draws from
 - **[The thesis](/docs/the-loco-thesis/)** — the five principles the projects sit on
 - **[Findings](/docs/findings/)** — what's measured, what's claimed, and what would invalidate each
 - **[Research](/docs/research/)** — active and planned studies across the lab
