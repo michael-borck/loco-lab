@@ -75,6 +75,30 @@ Frontier *capability* and frontier *experience* are separable. Users don't want 
 
 ---
 
+## Technique before scale
+
+The five principles compose into a method. Before reaching for a bigger model, we reach for better technique. Three layers of engineering sit between a problem and a model call, and each is where small-model work is won or lost.
+
+**Prompt engineering.** What goes into a single call. Frameworks like RTCF, RE2, focused prompting, and chain-of-thought are not historical curiosities — they punch above their weight on a 4B model in a way they don't on a frontier one. Single-turn scaffolding lives in [LocoLLM](https://locollm.org), where the empirical question is *which techniques actually help small models, and by how much.*
+
+**Context engineering.** What surrounds the call: profiles, memory, retrieved documents, tools, instruction files. The harness's `Context` subsystem (personality, rules, memory, tool specs) is context engineering made operational — instructions composed deliberately rather than glued into one mega-prompt.
+
+**Harness engineering.** What happens around multiple calls: orchestration patterns, verification loops, multi-turn debate, synthesis, iterative refinement. This is where errors compound — a 5% per-step error rate becomes 23% over five steps — and where scaffolds compound benefits in return. [LocoAgente](https://locoagente.org) is the harness layer; multi-turn patterns (Debate, Perspective, Synthesis, Iterative Refinement) are its research surface because that is where loop dynamics show up.
+
+Prompt engineering is not dead. Context engineering is not dead. They are the lower layers of harness engineering — and on small local models, the lower layers carry more weight, not less.
+
+### How the projects stack
+
+The principles also compose at the project level. LocoBench tells you which engine and model fit a given VRAM tier. LocoLLM specialises that base model with adapters and single-turn scaffolding. LocoAgente uses LocoLLM — or any OpenAI-compatible backend — as its inference layer and adds multi-turn orchestration. LocoConvoy scales the substrate horizontally when one card isn't enough. LocoPuente packages the result for users on a LAN. LocoEnsayo deploys it where it's used — currently education.
+
+The integrations are concrete: LocoAgente's `Inference` subsystem speaks OpenAI-compatible HTTP, so a LocoLLM router with adapter selection drops in as the backend without changes to the harness. LocoBench's tier recommendations directly inform LocoLLM's adapter selection budget.
+
+### What lives elsewhere
+
+Pedagogy and AI literacy live in the [AI Skills Passport](https://github.com/michael-borck/the-ai-skills-passport) — Curtin's institutional AI literacy programme. LocoLab's audience is researchers and practitioners building local-AI systems; the Skills Passport's audience is general staff and students learning to *use* AI. The same techniques can appear in both, framed differently: the Skills Passport explains *how to use RTCF*; LocoLLM measures *whether RTCF helps a 4B model.*
+
+---
+
 ## What this means for who shows up here
 
 Each [audience persona](audience) maps to one or more principles most directly:
