@@ -81,7 +81,7 @@ You know the best gear does not make the best work. A $150 secondhand GPU and sh
 
 **Your entry points:**
 - [LocoBench](https://locobench.org) — floor-representative benchmarks: worst card per VRAM tier, honest baselines
-- [GPU Inventory](https://locobench.org/docs/gpu-inventory/) — the actual secondhand fleet running these experiments
+- [GPU Inventory](https://locobench.org/gpu-inventory/) — the actual secondhand fleet running these experiments
 - [Economics of Local Training](economics-of-local-training) — what local AI actually costs to build and run
 
 The whole "[engineer before hardware](the-loco-thesis)" principle was built for you. Five `llama.cpp` flags + system RAM letting an eight-year-old GTX 1060 run a 30-billion-parameter MoE model is the kind of finding the floor produces. And once you know where the floor is, [The Local AI Opportunity](the-local-ai-opportunity) maps out who needs that capability — small accounting firms, regional legal practices, local consultancies — and what the work of building it for them actually looks like.

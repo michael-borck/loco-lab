@@ -23,7 +23,7 @@ Early-stage ideas with initial notes. Not yet under active development.
 
 | Paper | Description | Principles |
 |-------|-------------|------------|
-| **PCIe Multi-GPU Inference Scaling** | Does VRAM tier or architecture generation matter more? GTX vs RTX scaling comparison on consumer hardware ([experiment design](https://lococonvoy.org/docs/tiered-inference-experiment/)) | engineer |
+| **PCIe Multi-GPU Inference Scaling** | Does VRAM tier or architecture generation matter more? GTX vs RTX scaling comparison on consumer hardware ([experiment design](https://lococonvoy.org/tiered-inference-experiment/)) | engineer |
 | **Context Length Effects on Small Language Models** | How context window size affects small language model performance on consumer hardware | specialize |
 | **Perceived Intelligence vs Token Rate** | Relationship between perceived AI intelligence and token generation speed | methodological |
 

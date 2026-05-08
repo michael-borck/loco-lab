@@ -234,14 +234,14 @@ LocoLab has six active projects and several supporting docs. Three short questio
     convoy:      { name: 'LocoConvoy',                  url: 'https://lococonvoy.org',                    line: 'Multi-GPU parallelism experiments on consumer PCIe hardware.' },
     agente:      { name: 'LocoAgente',                  url: 'https://locoagente.org',                    line: 'Agentic scaffolding research: can small models do useful work in multi-turn loops?' },
     ensayo:      { name: 'LocoEnsayo',                  url: 'https://locoensayo.org',                    line: 'AI-populated rehearsal environments where students practise professional skills before facing the real thing.' },
-    landscape:   { name: 'AI Landscape',                url: '/docs/ai-landscape/',                       line: 'Honest comparison of local vs cloud options, including the cases where cloud is the right call.' },
-    why:         { name: 'Why Local AI',                url: '/docs/why-local-ai/',                       line: 'The structural argument: data sovereignty, compliance, and "private by architecture" rather than "private by policy".' },
-    start:       { name: 'Getting Started',             url: '/docs/getting-started/',                    line: 'Technical foundations — inference, VRAM, quantisation, and the rest of the stack.' },
-    research:    { name: 'Research',                    url: '/docs/research/',                           line: 'Active and planned studies across the lab, with status markers on every claim.' },
-    inventory:   { name: 'GPU Inventory',               url: 'https://locobench.org/docs/gpu-inventory/', line: 'The actual secondhand fleet running these experiments — what was bought, what it cost, what it can do.' },
-    econ:        { name: 'Economics of Local Training', url: '/docs/economics-of-local-training/',        line: 'What local AI actually costs to build and run — capital, electricity, time.' },
-    opportunity: { name: 'The Local AI Opportunity',    url: '/docs/the-local-ai-opportunity/',           line: 'The strategic argument: who benefits from local AI, why now, and what building it for them actually looks like.' },
-    findings:    { name: 'Findings',                    url: '/docs/findings/',                           line: 'What is measured, what is claimed, and what would invalidate each — the lab\'s honest record.' }
+    landscape:   { name: 'AI Landscape',                url: '/ai-landscape/',                       line: 'Honest comparison of local vs cloud options, including the cases where cloud is the right call.' },
+    why:         { name: 'Why Local AI',                url: '/why-local-ai/',                       line: 'The structural argument: data sovereignty, compliance, and "private by architecture" rather than "private by policy".' },
+    start:       { name: 'Getting Started',             url: '/getting-started/',                    line: 'Technical foundations — inference, VRAM, quantisation, and the rest of the stack.' },
+    research:    { name: 'Research',                    url: '/research/',                           line: 'Active and planned studies across the lab, with status markers on every claim.' },
+    inventory:   { name: 'GPU Inventory',               url: 'https://locobench.org/gpu-inventory/', line: 'The actual secondhand fleet running these experiments — what was bought, what it cost, what it can do.' },
+    econ:        { name: 'Economics of Local Training', url: '/economics-of-local-training/',        line: 'What local AI actually costs to build and run — capital, electricity, time.' },
+    opportunity: { name: 'The Local AI Opportunity',    url: '/the-local-ai-opportunity/',           line: 'The strategic argument: who benefits from local AI, why now, and what building it for them actually looks like.' },
+    findings:    { name: 'Findings',                    url: '/findings/',                           line: 'What is measured, what is claimed, and what would invalidate each — the lab\'s honest record.' }
   };
 
   const personas = {
@@ -416,7 +416,7 @@ LocoLab has six active projects and several supporting docs. Three short questio
         <div class="lw-secondary-grid">${secondaryHtml}</div>
 
         <div class="lw-read-first">
-          <strong>Read first:</strong> <a href="/docs/the-loco-thesis/#${persona.thesisHash}">${persona.thesisLabel}</a> — the principle most relevant to where you're starting.
+          <strong>Read first:</strong> <a href="/the-loco-thesis/#${persona.thesisHash}">${persona.thesisLabel}</a> — the principle most relevant to where you're starting.
         </div>
       </div>
     `;
@@ -435,7 +435,7 @@ LocoLab has six active projects and several supporting docs. Three short questio
 
 If you'd rather browse directly:
 
-- **[All nine personas in detail](/docs/audience/)** — the full audience page this wizard draws from
-- **[The thesis](/docs/the-loco-thesis/)** — the five principles the projects sit on
-- **[Findings](/docs/findings/)** — what's measured, what's claimed, and what would invalidate each
-- **[Research](/docs/research/)** — active and planned studies across the lab
+- **[All nine personas in detail](/audience/)** — the full audience page this wizard draws from
+- **[The thesis](/the-loco-thesis/)** — the five principles the projects sit on
+- **[Findings](/findings/)** — what's measured, what's claimed, and what would invalidate each
+- **[Research](/research/)** — active and planned studies across the lab
